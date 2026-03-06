@@ -19,7 +19,8 @@ for (const file of htmlFiles) {
   let replacements = 0;
 
   for (const [localPath, blobUrl] of Object.entries(urlMap)) {
-    // Match both quoted and unquoted, handle URL-encoded spaces
+    if (content.includes(blobUrl)) continue;
+
     const variants = [
       localPath,
       localPath.replace(/ /g, '%20'),
@@ -27,9 +28,11 @@ for (const file of htmlFiles) {
 
     for (const variant of variants) {
       const before = content;
-      // Replace all occurrences (src=, url(', background:url( etc.)
       content = content.replaceAll(variant, blobUrl);
-      if (content !== before) replacements++;
+      if (content !== before) {
+        replacements++;
+        break; // stop after first successful variant to avoid double-replace
+      }
     }
   }
 
