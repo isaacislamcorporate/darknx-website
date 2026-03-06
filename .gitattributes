@@ -1,6 +1,2 @@
-Video[[:space:]]Files/*.jpeg filter=lfs diff=lfs merge=lfs -text
-Video[[:space:]]Files/*.png filter=lfs diff=lfs merge=lfs -text
 *.mp4 filter=lfs diff=lfs merge=lfs -text
 *.mov filter=lfs diff=lfs merge=lfs -text
-*.webp filter=lfs diff=lfs merge=lfs -text
-Video[[:space:]]Files/*.jpg filter=lfs diff=lfs merge=lfs -text
