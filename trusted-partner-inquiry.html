@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Trusted By DARKNX — Partner Inquiry</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
+  <script>tailwind.config={theme:{extend:{fontFamily:{michroma:['Michroma','sans-serif']}}}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--teal:#2A5C7A;--teal-dim:rgba(42,92,122,0.09);--teal-border:rgba(42,92,122,0.22);--bg:#1C1F23;--bg-up:#22262B;--text-1:#F3F4F6;--text-2:#FFFFFF;--text-3:#6B7280;--line:rgba(255,255,255,0.07);--nav-h:64px;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text-1);font-family:'Microsoft Sans Serif','Microsoft YaHei',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.022;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
+    ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+    .f-michroma{font-family:'Michroma',sans-serif;}.text-teal{color:var(--teal);}.divider{height:1px;background:var(--line);}
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#080808;font-family:'Michroma',sans-serif;font-size:0.77rem;letter-spacing:0.09em;padding:0.76rem 1.8rem;border:none;cursor:pointer;box-shadow:0 0 28px rgba(21,188,182,0.24);transition:background .2s,box-shadow .2s,transform .2s;width:100%;}
+    .btn-p:hover{background:#1ECEC8;box-shadow:0 0 46px rgba(21,188,182,0.42);transform:translateY(-2px);}
+    #nav{position:fixed;top:0;left:0;right:0;z-index:300;height:var(--nav-h);display:flex;align-items:center;padding:0 3rem;background:rgba(28,31,35,0.92);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--line);}
+    .nav-inner{max-width:1320px;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+    .nav-a{font-size:0.81rem;letter-spacing:0.05em;color:var(--text-2);text-decoration:none;position:relative;transition:color .2s;}
+    .nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--teal);transition:width .2s;}
+    .nav-a:hover{color:var(--text-1);}.nav-a:hover::after{width:100%;}
+    .nav-item{position:relative;}.nav-item:hover .nav-drop{opacity:1;pointer-events:auto;transform:translateY(0);}
+    .nav-item::after{content:'';position:absolute;top:100%;left:0;right:0;height:10px;}
+    .nav-drop{position:absolute;top:100%;left:0;transform:translateY(8px);background:rgba(22,25,29,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);min-width:220px;padding:6px 0;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:400;}
+    .nav-drop a{display:block;padding:10px 18px;font-size:0.78rem;letter-spacing:0.04em;color:var(--text-2);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;cursor:pointer;}
+    .nav-drop a:hover{color:var(--teal);background:rgba(21,188,182,0.06);}
+    .nav-drop-divider{height:1px;background:var(--line);margin:6px 0;}
+    .stag{font-family:'Michroma',sans-serif;font-size:0.62rem;letter-spacing:0.24em;color:var(--teal);}
+    .h-xl{font-family:'Michroma',sans-serif;font-size:clamp(2rem,3.8vw,3.4rem);line-height:1.08;letter-spacing:-.03em;}
+    .fl{font-size:0.82rem;color:var(--text-3);text-decoration:none;transition:color .2s;}.fl:hover{color:var(--text-1);}
+    .si{width:30px;height:30px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:border-color .2s;}.si:hover{border-color:var(--teal-border);}
+    .form-field{display:flex;flex-direction:column;gap:7px;}
+    .form-label{font-family:'Michroma',sans-serif;font-size:0.63rem;letter-spacing:.14em;color:var(--text-3);}
+    .form-input{background:var(--bg-up);border:1px solid var(--line);color:var(--text-1);font-size:0.85rem;padding:12px 14px;outline:none;transition:border-color .2s;width:100%;}
+    .form-input:focus{border-color:var(--teal-border);}
+    .form-input::placeholder{color:var(--text-3);}
+    select.form-input option{background:var(--bg-up);color:var(--text-1);}
+    #mob{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,8,8,.97);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
+    #mob.on{display:flex;}.mlink{font-family:'Michroma',sans-serif;font-size:1.35rem;letter-spacing:.12em;color:var(--text-1);text-decoration:none;transition:color .2s;}.mlink:hover{color:var(--teal);}
+    @media(max-width:900px){.d-nav{display:none!important;}.form-cols{grid-template-columns:1fr!important;}#nav{padding:0 1.25rem;}}
+    @media(min-width:901px){.mob-btn{display:none!important;}}
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" aria-label="DARKNX" style="display:flex;align-items:center;flex-shrink:0;">
+      <img src="brand_assets/Group 27.png" alt="DARKNX" style="height:44px;width:auto;" />
+    </a>
+    <div class="d-nav" style="display:flex;align-items:center;gap:36px;">
+      <a href="index.html" class="nav-a">Home</a>
+      <div class="nav-item">
+        <a href="index.html#services" class="nav-a">Services</a>
+        <div class="nav-drop">
+          <a href="modular-deployments.html">Modular Deployments</a>
+          <a href="greenfield-data-centers.html">Greenfield Data Centers</a>
+          <a href="brownfield-data-centers.html">Brownfield Data Centers</a>
+          <a href="manufacturing.html">Manufacturing</a>
+          <div class="nav-drop-divider"></div>
+          <a href="consultation.html">Consultation</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="cooling.html" class="nav-a">AI Infrastructure</a>
+        <div class="nav-drop">
+          <a href="2-phase-cooling.html">2-Phase DTC Cooling</a>
+          <a href="cooling.html">Traditional Cooling</a>
+          <a href="manufacturing.html">Manufacturing</a>
+          <a href="energy.html">Energy</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="company.html" class="nav-a" style="color:var(--teal);">About</a>
+        <div class="nav-drop">
+          <a href="company.html">Company</a>
+          <a href="partners.html">Partners</a>
+          <a href="impact.html">Impact</a>
+          <a href="leadership.html">Leadership</a>
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="blogs.html" class="nav-a">Resources</a>
+        <div class="nav-drop">
+          <a href="press-release.html">Press Release</a>
+          <a href="blogs.html">Blogs</a>
+          <a href="whitepapers.html">Whitepapers</a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-a">Contact</a>
+    </div>
+    <button class="mob-btn" onclick="document.getElementById('mob').classList.toggle('on')" aria-label="Menu" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:6px;">
+      <span style="display:block;width:22px;height:1.5px;background:var(--text-1)"></span>
+      <span style="display:block;width:15px;height:1.5px;background:var(--teal)"></span>
+      <span style="display:block;width:22px;height:1.5px;background:var(--text-1)"></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mob" role="dialog" aria-modal="true" aria-label="Navigation">
+  <button onclick="document.getElementById('mob').classList.remove('on')" style="position:absolute;top:22px;right:24px;background:none;border:none;color:var(--text-2);font-size:1.6rem;cursor:pointer;line-height:1;" aria-label="Close">×</button>
+  <a href="index.html" class="mlink">Home</a>
+  <a href="index.html#services" class="mlink">Services</a>
+  <a href="cooling.html" class="mlink">AI Infrastructure</a>
+  <a href="company.html" class="mlink">About</a>
+  <a href="blogs.html" class="mlink">Resources</a>
+  <a href="contact.html" class="mlink">Contact</a>
+</div>
+
+<!-- HERO -->
+<section style="padding-top:calc(var(--nav-h) + 5rem);padding-bottom:5rem;padding-left:3rem;padding-right:3rem;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(42,92,122,0.16) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="max-width:1320px;margin:0 auto;position:relative;z-index:1;">
+    <div style="margin-bottom:16px;">
+      <a href="partners.html" style="font-size:0.72rem;letter-spacing:.1em;color:#B0B8C4;text-decoration:none;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='#B0B8C4'">← PARTNERS</a>
+    </div>
+    <div style="margin-bottom:14px;"><span class="stag">PARTNER APPLICATION</span></div>
+    <h1 class="h-xl" style="margin-bottom:20px;max-width:700px;">Join the <span class="text-teal">Trusted By DARKNX</span> Program</h1>
+    <p style="font-size:1rem;line-height:1.78;color:var(--text-3);max-width:540px;">Submit your organization's information for evaluation. Our partnerships team will review your application and be in touch within five business days.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- FORM SECTION -->
+<section style="padding:6rem 3rem 8rem;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div class="form-cols" style="display:grid;grid-template-columns:1fr 1.4fr;gap:80px;align-items:start;">
+
+      <!-- LEFT: Program details -->
+      <div>
+        <div style="margin-bottom:40px;">
+          <div class="stag" style="margin-bottom:16px;color:#fff;">ABOUT THE PROGRAM</div>
+          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">The Trusted by DARKNX program formalizes strategic partnerships with organizations that meet our rigorous standards for performance, compliance, and long-term reliability across the data center stack.</p>
+        </div>
+
+        <div style="display:flex;flex-direction:column;gap:24px;margin-bottom:40px;">
+          <div style="border-left:2px solid var(--teal);padding-left:16px;">
+            <div class="f-michroma" style="font-size:0.63rem;letter-spacing:.14em;color:var(--text-3);margin-bottom:6px;">ELIGIBILITY</div>
+            <p style="font-size:0.85rem;color:var(--text-1);line-height:1.65;">Technology vendors, manufacturers, and service providers operating in power, cooling, AI hardware, software platforms, or specialized data center services.</p>
+          </div>
+          <div style="border-left:2px solid var(--teal);padding-left:16px;">
+            <div class="f-michroma" style="font-size:0.63rem;letter-spacing:.14em;color:var(--text-3);margin-bottom:6px;">REVIEW TIMELINE</div>
+            <p style="font-size:0.85rem;color:var(--text-1);line-height:1.65;">Within five business days of submission</p>
+          </div>
+          <div style="border-left:2px solid var(--teal);padding-left:16px;">
+            <div class="f-michroma" style="font-size:0.63rem;letter-spacing:.14em;color:var(--text-3);margin-bottom:6px;">WHAT HAPPENS NEXT</div>
+            <p style="font-size:0.85rem;color:var(--text-1);line-height:1.65;">Our partnerships team will evaluate your submission and reach out to schedule a technical alignment call if there is a fit.</p>
+          </div>
+        </div>
+
+        <div style="padding:24px;border:1px solid var(--line);background:var(--bg-up);">
+          <div class="f-michroma" style="font-size:0.63rem;letter-spacing:.14em;color:var(--teal);margin-bottom:10px;">EVALUATION CRITERIA</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;">
+            <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);flex-shrink:0;">—</span>Technical performance at high-density AI scale</li>
+            <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);flex-shrink:0;">—</span>Operational reliability and uptime track record</li>
+            <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);flex-shrink:0;">—</span>Compliance with applicable data center standards</li>
+            <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);flex-shrink:0;">—</span>Long-term supportability and roadmap alignment</li>
+            <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;align-items:flex-start;"><span style="color:var(--teal);flex-shrink:0;">—</span>Ability to scale with DARKNX project pipeline</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- RIGHT: Form -->
+      <div style="border:1px solid var(--line);padding:40px;">
+        <div class="f-michroma" style="font-size:0.63rem;letter-spacing:.16em;color:var(--text-3);margin-bottom:28px;">PARTNER APPLICATION</div>
+        <form onsubmit="handleSubmit(event)" style="display:flex;flex-direction:column;gap:20px;">
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-field">
+              <label class="form-label">FULL NAME <span style="color:var(--teal);">*</span></label>
+              <input type="text" class="form-input" placeholder="Jane Smith" required />
+            </div>
+            <div class="form-field">
+              <label class="form-label">JOB TITLE <span style="color:var(--teal);">*</span></label>
+              <input type="text" class="form-input" placeholder="VP of Partnerships" required />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">COMPANY NAME <span style="color:var(--teal);">*</span></label>
+            <input type="text" class="form-input" placeholder="Acme Technologies Inc." required />
+          </div>
+
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="form-field">
+              <label class="form-label">EMAIL ADDRESS <span style="color:var(--teal);">*</span></label>
+              <input type="email" class="form-input" placeholder="jane@acme.com" required />
+            </div>
+            <div class="form-field">
+              <label class="form-label">PHONE NUMBER</label>
+              <input type="tel" class="form-input" placeholder="+1 (555) 000-0000" />
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">COMPANY WEBSITE <span style="color:var(--teal);">*</span></label>
+            <input type="url" class="form-input" placeholder="https://acme.com" required />
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">PARTNER CATEGORY <span style="color:var(--teal);">*</span></label>
+            <select class="form-input" required>
+              <option value="" disabled selected>Select your primary category</option>
+              <option value="power">Power Infrastructure</option>
+              <option value="cooling">Cooling Systems</option>
+              <option value="ai-hardware">AI Hardware &amp; Compute</option>
+              <option value="networking">Networking &amp; Connectivity</option>
+              <option value="software">Software Platforms</option>
+              <option value="construction">Construction &amp; Facilities</option>
+              <option value="services">Specialized Services</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">COMPANY OVERVIEW <span style="color:var(--teal);">*</span></label>
+            <textarea class="form-input" rows="4" placeholder="Briefly describe your company, what you offer, and your position in the market." required style="resize:vertical;"></textarea>
+          </div>
+
+          <div class="form-field">
+            <label class="form-label">RELEVANCE TO DARKNX <span style="color:var(--teal);">*</span></label>
+            <textarea class="form-input" rows="4" placeholder="Explain how your products or services would support DARKNX's high-density AI data center deployments — include any relevant certifications, customers, or case studies." required style="resize:vertical;"></textarea>
+          </div>
+
+          <div style="display:flex;align-items:flex-start;gap:10px;padding:16px;background:var(--bg-up);border:1px solid var(--line);">
+            <input type="checkbox" id="consent" required style="margin-top:2px;accent-color:var(--teal);flex-shrink:0;" />
+            <label for="consent" style="font-size:0.78rem;color:var(--text-3);line-height:1.6;cursor:pointer;">I agree to DARKNX contacting me regarding this application. I understand my information will be handled in accordance with the <a href="privacy.html" style="color:var(--teal);text-decoration:none;">Privacy Policy</a>.</label>
+          </div>
+
+          <button type="submit" class="btn-p" style="justify-content:center;margin-top:4px;">Submit Application →</button>
+          <p style="font-size:0.7rem;color:var(--text-3);letter-spacing:.06em;text-align:center;">Our partnerships team will respond within five business days.</p>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--bg-up);border-top:1px solid var(--line);padding:52px 3rem 32px;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;">
+      <div>
+        <img src="brand_assets/Frame 16.png" alt="DARKNX" style="height:24px;width:auto;margin-bottom:16px;display:block;" />
+        <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);max-width:215px;margin-bottom:18px;">High-Density AI infrastructure. Engineered for reliability. Built for scale.</p>
+        <div style="font-size:0.75rem;line-height:1.8;color:var(--text-3);max-width:215px;margin-bottom:22px;">
+          <p style="font-size:0.67rem;letter-spacing:.1em;color:var(--text-3);margin-bottom:6px;">HEAD OFFICES</p>
+          <p>3619 7th Ave S<br>Seattle, WA — United States</p>
+          <p style="margin-top:8px;">100 University Avenue<br>Toronto, ON — Canada</p>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <a href="https://x.com/weareinnventure/status/1990467523599360335" target="_blank" rel="noopener" class="si" aria-label="X"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--text-3)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.linkedin.com/company/darknx/" target="_blank" rel="noopener" class="si" aria-label="LinkedIn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">SERVICES</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="modular-deployments.html" class="fl">Modular Deployments</a></li>
+          <li><a href="greenfield-data-centers.html" class="fl">Greenfield Data Centers</a></li>
+          <li><a href="brownfield-data-centers.html" class="fl">Brownfield Data Centers</a></li>
+          <li><a href="manufacturing.html" class="fl">Manufacturing</a></li>
+          <li><a href="consultation.html" class="fl">Consultation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">COMPANY</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="company.html" class="fl">About</a></li>
+          <li><a href="partners.html" class="fl" style="color:var(--teal);">Partners</a></li>
+          <li><a href="careers.html" class="fl">Careers</a></li>
+          <li><a href="contact.html" class="fl">Contact Us</a></li>
+          <li style="padding-top:8px;border-top:1px solid var(--line);margin-top:4px;"><a href="legal.html" class="fl">Legal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">RESOURCES</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="press-release.html" class="fl">Press Release</a></li>
+          <li><a href="blogs.html" class="fl">Blogs</a></li>
+          <li><a href="whitepapers.html" class="fl">Whitepapers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="divider" style="margin-bottom:20px;"></div>
+    <p style="font-size:0.71rem;color:var(--text-3);">© 2025 DARKNX Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+function handleSubmit(e) {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+
+  const inputs    = form.querySelectorAll('input:not([type=checkbox])');
+  const select    = form.querySelector('select');
+  const textareas = form.querySelectorAll('textarea');
+
+  const nameParts = inputs[0].value.trim().split(' ');
+  const fields = [
+    { name: 'firstname',        value: nameParts[0] || '' },
+    { name: 'lastname',         value: nameParts.slice(1).join(' ') || '' },
+    { name: 'jobtitle',         value: inputs[1].value.trim() },
+    { name: 'company',          value: inputs[2].value.trim() },
+    { name: 'email',            value: inputs[3].value.trim() },
+    { name: 'phone',            value: inputs[4].value.trim() },
+    { name: 'website',          value: inputs[5].value.trim() },
+    { name: 'partner_category', value: select.value },
+    { name: 'company_overview', value: textareas[0].value.trim() },
+    { name: 'message',          value: textareas[1].value.trim() },
+  ].filter(f => f.value);
+
+  const PORTAL_ID = '342006048';
+  const FORM_GUID = '4eb3ffb0-33cf-45a8-8b46-9e2f072cf44b'; // HubSpot → Marketing → Forms → create form → copy GUID from URL
+
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${PORTAL_ID}/${FORM_GUID}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields, context: { pageUri: location.href, pageName: document.title } })
+  })
+  .then(r => {
+    if (r.ok) {
+      btn.textContent = 'Application Submitted ✓';
+      btn.style.background = '#1a3a2a';
+      btn.style.color = '#4ade80';
+      btn.style.boxShadow = 'none';
+    } else {
+      btn.textContent = 'Error — please try again';
+      btn.style.background = 'rgba(122,42,42,0.3)';
+      btn.style.color = '#f87171';
+      btn.disabled = false;
+    }
+  })
+  .catch(() => {
+    btn.textContent = 'Error — please try again';
+    btn.style.background = 'rgba(122,42,42,0.3)';
+    btn.style.color = '#f87171';
+    btn.disabled = false;
+  });
+}
+</script>
+
+</body>
+</html>

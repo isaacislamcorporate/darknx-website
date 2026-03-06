@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hardware Manufacturing — DARKNX</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
+  <script>tailwind.config={theme:{extend:{fontFamily:{michroma:['Michroma','sans-serif']}}}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--teal:#2A5C7A;--teal-dim:rgba(42,92,122,0.09);--teal-border:rgba(42,92,122,0.22);--bg:#1C1F23;--bg-up:#22262B;--text-1:#F3F4F6;--text-2:#FFFFFF;--text-3:#6B7280;--line:rgba(255,255,255,0.07);--nav-h:64px;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text-1);font-family:'Microsoft Sans Serif','Microsoft YaHei',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.022;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
+    ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+    .f-michroma{font-family:'Michroma',sans-serif;}.text-teal{color:var(--teal);}.divider{height:1px;background:var(--line);}
+    .btn-p{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#080808;font-family:'Michroma',sans-serif;font-size:0.77rem;letter-spacing:0.09em;padding:0.76rem 1.8rem;border:none;cursor:pointer;box-shadow:0 0 28px rgba(21,188,182,0.24);transition:background .2s,box-shadow .2s,transform .2s;}
+    .btn-p:hover{background:#1ECEC8;box-shadow:0 0 46px rgba(21,188,182,0.42);transform:translateY(-2px);}
+    .btn-o{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--text-1);font-family:'Michroma',sans-serif;font-size:0.77rem;letter-spacing:0.09em;padding:0.76rem 1.8rem;border:1px solid rgba(255,255,255,0.16);cursor:pointer;transition:border-color .2s,color .2s,transform .2s;}
+    .btn-o:hover{border-color:var(--teal-border);color:var(--teal);transform:translateY(-2px);}
+    #nav{position:fixed;top:0;left:0;right:0;z-index:300;height:var(--nav-h);display:flex;align-items:center;padding:0 3rem;background:rgba(28,31,35,0.92);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--line);}
+    .nav-inner{max-width:1320px;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+    .nav-a{font-size:0.81rem;letter-spacing:0.05em;color:var(--text-2);text-decoration:none;position:relative;transition:color .2s;}
+    .nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--teal);transition:width .2s;}
+    .nav-a:hover{color:var(--text-1);}.nav-a:hover::after{width:100%;}
+    .nav-item{position:relative;}.nav-item:hover .nav-drop{opacity:1;pointer-events:auto;transform:translateY(0);}
+    .nav-item::after{content:'';position:absolute;top:100%;left:0;right:0;height:10px;}
+    .nav-drop{position:absolute;top:100%;left:0;transform:translateY(8px);background:rgba(22,25,29,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);min-width:220px;padding:6px 0;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:400;}
+    .nav-drop a{display:block;padding:10px 18px;font-size:0.78rem;letter-spacing:0.04em;color:var(--text-2);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;cursor:pointer;}
+    .nav-drop a:hover{color:var(--teal);background:rgba(21,188,182,0.06);}
+    .nav-drop-divider{height:1px;background:var(--line);margin:6px 0;}
+    .stag{font-family:'Michroma',sans-serif;font-size:0.62rem;letter-spacing:0.24em;color:var(--teal);}
+    .h-xl{font-family:'Michroma',sans-serif;font-size:clamp(2rem,3.8vw,3.4rem);line-height:1.08;letter-spacing:-.03em;}
+    .spec-r{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);}
+    .spec-r:last-child{border-bottom:none;}.sk{font-size:0.71rem;color:var(--text-3);letter-spacing:.1em;}
+    .sv{font-family:'Michroma',sans-serif;font-size:0.71rem;color:var(--text-1);}.sv.t{color:var(--teal);}
+    .step-row{display:flex;gap:24px;align-items:flex-start;padding:28px 0;border-bottom:1px solid var(--line);}
+    .step-row:last-child{border-bottom:none;}.step-num{font-family:'Michroma',sans-serif;font-size:1.4rem;color:var(--teal);min-width:48px;}
+    .fl{font-size:0.82rem;color:var(--text-3);text-decoration:none;transition:color .2s;}.fl:hover{color:var(--text-1);}
+    .si{width:30px;height:30px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:border-color .2s;}.si:hover{border-color:var(--teal-border);}
+    #mob{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,8,8,.97);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
+    #mob.on{display:flex;}.mlink{font-family:'Michroma',sans-serif;font-size:1.35rem;letter-spacing:.12em;color:var(--text-1);text-decoration:none;transition:color .2s;}.mlink:hover{color:var(--teal);}
+    @media(max-width:900px){.d-nav{display:none!important;}.hero-cols,.specs-cols{grid-template-columns:1fr!important;}#nav{padding:0 1.25rem;}}
+    @media(min-width:901px){.mob-btn{display:none!important;}}
+    [style*="gap:1px"]>div{transition:background .25s ease,box-shadow .25s ease;}[style*="gap:1px"]>div:hover{background:rgba(107,174,214,.1)!important;box-shadow:inset 0 0 0 1px rgba(107,174,214,.22);}
+  </style>
+</head>
+<body>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" aria-label="DARKNX" style="display:flex;align-items:center;flex-shrink:0;">
+      <img src="brand_assets/Group 27.png" alt="DARKNX" style="height:44px;width:auto;" />
+    </a>
+    <div class="d-nav" style="display:flex;align-items:center;gap:36px;">
+      <a href="index.html" class="nav-a">Home</a>
+      <div class="nav-item">
+        <a href="index.html#services" class="nav-a" style="color:var(--teal);">Services</a>
+        <div class="nav-drop">
+          <a href="modular-deployments.html">Modular Deployments</a>
+          <a href="greenfield-data-centers.html">Greenfield Data Centers</a>
+          <a href="brownfield-data-centers.html">Brownfield Data Centers</a>
+          <a href="hardware-manufacturing.html" style="color:var(--teal);">Hardware Manufacturing</a>
+          <div class="nav-drop-divider"></div>
+          <a href="consultation.html">Consultation</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="cooling.html" class="nav-a">AI Infrastructure</a>
+        <div class="nav-drop">
+          <a href="2-phase-cooling.html">2-Phase DTC Cooling</a>
+          <a href="cooling.html">Traditional Cooling</a>
+          <a href="manufacturing.html">Manufacturing</a>
+          <a href="energy.html">Energy</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="company.html" class="nav-a">About</a>
+        <div class="nav-drop">
+          <a href="company.html">Company</a>
+          <a href="partners.html">Partners</a>
+          <a href="impact.html">Impact</a>
+          <a href="leadership.html">Leadership</a>
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="blogs.html" class="nav-a">Resources</a>
+        <div class="nav-drop">
+          <a href="press-release.html">Press Release</a>
+          <a href="blogs.html">Blogs</a>
+          <a href="whitepapers.html">Whitepapers</a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-a">Contact</a>
+    </div>
+    <button class="mob-btn" onclick="document.getElementById('mob').classList.toggle('on')" aria-label="Menu" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:6px;">
+      <span style="display:block;width:22px;height:1.5px;background:var(--text-1)"></span>
+      <span style="display:block;width:15px;height:1.5px;background:var(--teal)"></span>
+      <span style="display:block;width:22px;height:1.5px;background:var(--text-1)"></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mob" role="dialog" aria-modal="true" aria-label="Navigation">
+  <button onclick="document.getElementById('mob').classList.remove('on')" style="position:absolute;top:22px;right:24px;background:none;border:none;color:var(--text-2);font-size:1.6rem;cursor:pointer;line-height:1;" aria-label="Close">×</button>
+  <a href="index.html" class="mlink">Home</a>
+  <a href="index.html#services" class="mlink">Services</a>
+  <a href="cooling.html" class="mlink">AI Infrastructure</a>
+  <a href="company.html" class="mlink">About</a>
+  <a href="blogs.html" class="mlink">Resources</a>
+  <a href="contact.html" class="mlink">Contact</a>
+</div>
+
+<!-- HERO -->
+<section style="padding-top:calc(var(--nav-h) + 6rem);padding-bottom:6rem;padding-left:3rem;padding-right:3rem;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(42,92,122,0.18) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="max-width:1320px;margin:0 auto;position:relative;z-index:1;">
+    <div style="margin-bottom:16px;">
+      <a href="index.html#services" style="font-size:0.72rem;letter-spacing:.1em;color:var(--text-3);text-decoration:none;display:inline-flex;align-items:center;gap:6px;" onmouseover="this.style.color='var(--teal)'" onmouseout="this.style.color='var(--text-3)'">← SERVICES</a>
+    </div>
+    <div style="margin-bottom:14px;"><span class="stag">MANUFACTURING</span></div>
+    <div class="hero-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+      <div>
+        <h1 class="h-xl" style="margin-bottom:24px;">In-House <span class="text-teal">OEM Components</span></h1>
+        <p style="font-size:1rem;line-height:1.78;color:var(--text-3);max-width:480px;margin-bottom:36px;">Integrated production of critical infrastructure components, including chillers, transformers, enclosures, switchgear, ATS, UPS systems, and turbines. Built to DARKNX standards, eliminating third-party dependencies on the critical path.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="contact.html"><button class="btn-p">Discuss Project Scope →</button></a>
+          <a href="whitepapers.html"><button class="btn-o">Download Overview</button></a>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);">
+        <div style="background:var(--bg-up);padding:28px;">
+          <div class="f-michroma text-teal" style="font-size:2rem;letter-spacing:-.02em;margin-bottom:6px;">OEM</div>
+          <div style="font-size:0.72rem;letter-spacing:.1em;color:var(--text-3);">IN-HOUSE PRODUCTION</div>
+        </div>
+        <div style="background:var(--bg-up);padding:28px;">
+          <div class="f-michroma text-teal" style="font-size:2rem;letter-spacing:-.02em;margin-bottom:6px;">ZERO</div>
+          <div style="font-size:0.72rem;letter-spacing:.1em;color:var(--text-3);">CRITICAL PATH DELAYS</div>
+        </div>
+        <div style="background:var(--bg-up);padding:28px;">
+          <div class="f-michroma text-teal" style="font-size:2rem;letter-spacing:-.02em;margin-bottom:6px;">FULL</div>
+          <div style="font-size:0.72rem;letter-spacing:.1em;color:var(--text-3);">QUALITY CONTROL</div>
+        </div>
+        <div style="background:var(--bg-up);padding:28px;">
+          <div class="f-michroma text-teal" style="font-size:2rem;letter-spacing:-.02em;margin-bottom:6px;">E2E</div>
+          <div style="font-size:0.72rem;letter-spacing:.1em;color:var(--text-3);">COMPONENT AUTHORITY</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SPECS -->
+<section style="padding:7rem 3rem;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div style="margin-bottom:14px;"><span class="stag" style="color:#fff;">CAPABILITIES &amp; SPECIFICATIONS</span></div>
+    <h2 class="h-xl" style="margin-bottom:52px;max-width:560px;">Critical Components. <span class="text-teal">Built In-House.</span></h2>
+    <div class="specs-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;">
+      <div style="border:1px solid var(--line);">
+        <div style="background:var(--bg-up);border-bottom:1px solid var(--line);padding:10px 20px;"><span class="stag">MANUFACTURED COMPONENTS</span></div>
+        <div style="padding:8px 20px;">
+          <div class="spec-r"><span class="sk">CHILLERS</span><span class="sv">Custom liquid cooling units</span></div>
+          <div class="spec-r"><span class="sk">TRANSFORMERS</span><span class="sv">MV/LV power transformers</span></div>
+          <div class="spec-r"><span class="sk">ENCLOSURES</span><span class="sv">High-density rack enclosures</span></div>
+          <div class="spec-r"><span class="sk">SWITCHGEAR</span><span class="sv">MV &amp; LV custom switchgear</span></div>
+          <div class="spec-r"><span class="sk">ATS</span><span class="sv t">Automatic Transfer Switches</span></div>
+          <div class="spec-r"><span class="sk">UPS SYSTEMS</span><span class="sv">Modular UPS &amp; battery systems</span></div>
+          <div class="spec-r"><span class="sk">TURBINES</span><span class="sv">Backup generation turbines</span></div>
+          <div class="spec-r"><span class="sk">QA STANDARD</span><span class="sv t">Full load &amp; compliance testing</span></div>
+        </div>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:20px;">
+        <div style="padding:24px;border:1px solid var(--line);">
+          <div style="font-size:0.72rem;letter-spacing:.12em;color:var(--teal);font-family:'Michroma',sans-serif;margin-bottom:10px;">VERTICAL INTEGRATION</div>
+          <p style="font-size:0.85rem;line-height:1.72;color:var(--text-3);">By manufacturing critical components in-house, DARKNX eliminates the supply chain vulnerabilities that cause delays on conventional data center projects — keeping the critical path under our control.</p>
+        </div>
+        <div style="padding:24px;border:1px solid var(--line);">
+          <div style="font-size:0.72rem;letter-spacing:.12em;color:var(--teal);font-family:'Michroma',sans-serif;margin-bottom:10px;">PRECISION ENGINEERING</div>
+          <p style="font-size:0.85rem;line-height:1.72;color:var(--text-3);">Every component is engineered and tested to DARKNX's own performance specifications — ensuring compatibility and reliability across all deployed infrastructure, not just standard compliance.</p>
+        </div>
+        <div style="padding:24px;border:1px solid var(--line);">
+          <div style="font-size:0.72rem;letter-spacing:.12em;color:var(--teal);font-family:'Michroma',sans-serif;margin-bottom:10px;">ACCELERATED DELIVERY</div>
+          <p style="font-size:0.85rem;line-height:1.72;color:var(--text-3);">In-house manufacturing means shorter lead times, tighter coordination, and no dependency on external vendors for the most critical items on the project schedule.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- HOW IT WORKS -->
+<section style="padding:7rem 3rem;background:var(--bg-up);">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div style="margin-bottom:14px;"><span class="stag" style="color:#fff;">PRODUCTION PROCESS</span></div>
+    <h2 class="h-xl" style="margin-bottom:52px;max-width:500px;">From Specification to <span class="text-teal">Deployment</span></h2>
+    <div style="max-width:780px;">
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div>
+          <h3 class="f-michroma" style="font-size:0.85rem;letter-spacing:.04em;margin-bottom:8px;">Requirements &amp; Specification</h3>
+          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">We define exact performance specifications for each component based on the project's power, thermal, and redundancy requirements — before production begins.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div>
+          <h3 class="f-michroma" style="font-size:0.85rem;letter-spacing:.04em;margin-bottom:8px;">Engineering &amp; Design Control</h3>
+          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">DARKNX governs the full component design — ensuring every unit meets the project's technical architecture and integrates without compromise into the broader infrastructure.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div>
+          <h3 class="f-michroma" style="font-size:0.85rem;letter-spacing:.04em;margin-bottom:8px;">Production &amp; Quality Assurance</h3>
+          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">Components are manufactured in-house under strict quality standards. Every unit undergoes full load testing and compliance verification before leaving the production facility.</p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">04</div>
+        <div>
+          <h3 class="f-michroma" style="font-size:0.85rem;letter-spacing:.04em;margin-bottom:8px;">Site Integration &amp; Commissioning</h3>
+          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">Manufactured components are integrated into the project under DARKNX's unified technical oversight — commissioned, load-tested, and verified as part of the complete system handover.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA -->
+<section style="padding:7rem 3rem;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:40px;">
+      <div style="max-width:560px;">
+        <div style="margin-bottom:14px;"><span class="stag" style="color:#fff;">GET IN TOUCH</span></div>
+        <h2 class="h-xl" style="margin-bottom:20px;">Ready to Source <span class="text-teal">Smarter?</span></h2>
+        <p style="font-size:1rem;line-height:1.75;color:var(--text-3);max-width:420px;">Data center standards are evolving toward high-density AI infrastructure, and DARKNX is engineering to that future today. We are here to guide you.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:220px;">
+        <a href="contact.html"><button class="btn-p">Discuss Project Scope →</button></a>
+        <a href="blogs.html"><button class="btn-o">Latest Blog</button></a>
+        <span style="font-size:0.7rem;color:var(--text-3);letter-spacing:.06em;text-align:center;">Ready to help, when you need it.</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--bg-up);border-top:1px solid var(--line);padding:52px 3rem 32px;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;">
+      <div>
+        <img src="brand_assets/Frame 16.png" alt="DARKNX" style="height:24px;width:auto;margin-bottom:16px;display:block;" />
+        <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);max-width:215px;margin-bottom:18px;">High-Density AI infrastructure. Engineered for reliability. Built for scale.</p>
+        <div style="font-size:0.75rem;line-height:1.8;color:var(--text-3);max-width:215px;margin-bottom:22px;">
+          <p style="font-size:0.67rem;letter-spacing:.1em;color:var(--text-3);margin-bottom:6px;">HEAD OFFICES</p>
+          <p>3619 7th Ave S<br>Seattle, WA — United States</p>
+          <p style="margin-top:8px;">100 University Avenue<br>Toronto, ON — Canada</p>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <a href="https://x.com/weareinnventure/status/1990467523599360335" target="_blank" rel="noopener" class="si" aria-label="X"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--text-3)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.linkedin.com/company/darknx/" target="_blank" rel="noopener" class="si" aria-label="LinkedIn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">SERVICES</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="modular-deployments.html" class="fl">Modular Deployments</a></li>
+          <li><a href="greenfield-data-centers.html" class="fl">Greenfield Data Centers</a></li>
+          <li><a href="brownfield-data-centers.html" class="fl">Brownfield Data Centers</a></li>
+          <li><a href="hardware-manufacturing.html" class="fl" style="color:var(--teal);">Manufacturing</a></li>
+          <li><a href="consultation.html" class="fl">Consultation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">COMPANY</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="company.html" class="fl">About</a></li>
+          <li><a href="partners.html" class="fl">Partners</a></li>
+          
+          <li><a href="careers.html" class="fl">Careers</a></li>
+          <li><a href="contact.html" class="fl">Contact Us</a></li>
+          <li style="padding-top:8px;border-top:1px solid var(--line);margin-top:4px;"><a href="legal.html" class="fl">Legal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">RESOURCES</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="press-release.html" class="fl">Press Release</a></li>
+          <li><a href="blogs.html" class="fl">Blogs</a></li>
+          <li><a href="whitepapers.html" class="fl">Whitepapers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="divider" style="margin-bottom:20px;"></div>
+    <p style="font-size:0.71rem;color:var(--text-3);">© 2025 DARKNX Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

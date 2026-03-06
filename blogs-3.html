@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blogs — DARKNX</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Michroma&display=swap" rel="stylesheet" />
+  <script>tailwind.config={theme:{extend:{fontFamily:{michroma:['Michroma','sans-serif']}}}}</script>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{--teal:#2A5C7A;--teal-dim:rgba(42,92,122,0.09);--teal-border:rgba(42,92,122,0.22);--bg:#1C1F23;--bg-up:#22262B;--text-1:#F3F4F6;--text-2:#FFFFFF;--text-3:#6B7280;--line:rgba(255,255,255,0.07);--nav-h:64px;}
+    html{scroll-behavior:smooth;}
+    body{background:var(--bg);color:var(--text-1);font-family:'Microsoft Sans Serif','Microsoft YaHei',sans-serif;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+    body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;opacity:0.022;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");}
+    ::-webkit-scrollbar{width:3px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+    .f-michroma{font-family:'Michroma',sans-serif;}.text-teal{color:var(--teal);}.divider{height:1px;background:var(--line);}
+    #nav{position:fixed;top:0;left:0;right:0;z-index:300;height:var(--nav-h);display:flex;align-items:center;padding:0 3rem;background:rgba(28,31,35,0.92);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);border-bottom:1px solid var(--line);}
+    .nav-inner{max-width:1320px;width:100%;margin:0 auto;display:flex;align-items:center;justify-content:space-between;}
+    .nav-a{font-size:0.81rem;letter-spacing:0.05em;color:var(--text-2);text-decoration:none;position:relative;transition:color .2s;}
+    .nav-a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--teal);transition:width .2s;}
+    .nav-a:hover{color:var(--text-1);}.nav-a:hover::after{width:100%;}
+    .nav-item{position:relative;}.nav-item:hover .nav-drop{opacity:1;pointer-events:auto;transform:translateY(0);}
+    .nav-item::after{content:'';position:absolute;top:100%;left:0;right:0;height:10px;}
+    .nav-drop{position:absolute;top:100%;left:0;transform:translateY(8px);background:rgba(22,25,29,0.98);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--line);min-width:220px;padding:6px 0;opacity:0;pointer-events:none;transition:opacity .18s ease,transform .18s ease;z-index:400;}
+    .nav-drop a{display:block;padding:10px 18px;font-size:0.78rem;letter-spacing:0.04em;color:var(--text-2);text-decoration:none;transition:color .15s,background .15s;white-space:nowrap;cursor:pointer;}
+    .nav-drop a:hover{color:var(--teal);background:rgba(21,188,182,0.06);}
+    .nav-drop-divider{height:1px;background:var(--line);margin:6px 0;}
+    .stag{font-family:'Michroma',sans-serif;font-size:0.62rem;letter-spacing:0.24em;color:var(--teal);}
+    .h-xl{font-family:'Michroma',sans-serif;font-size:clamp(2rem,3.8vw,3.4rem);line-height:1.08;letter-spacing:-.03em;}
+    .fl{font-size:0.82rem;color:var(--text-3);text-decoration:none;transition:color .2s;}.fl:hover{color:var(--text-1);}
+    .si{width:30px;height:30px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:border-color .2s;}.si:hover{border-color:var(--teal-border);}
+    .blog-card{border:1px solid var(--line);padding:32px;transition:border-color .2s,background .2s,box-shadow .2s,transform .2s;}.blog-card:hover{border-color:rgba(42,92,122,0.5);background:var(--bg-up)!important;box-shadow:0 4px 32px rgba(42,92,122,0.18);transform:translateY(-2px);}
+    #mob{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,8,8,.97);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
+    #mob.on{display:flex;}.mlink{font-family:'Michroma',sans-serif;font-size:1.35rem;letter-spacing:.12em;color:var(--text-1);text-decoration:none;transition:color .2s;}.mlink:hover{color:var(--teal);}
+    @media(max-width:900px){.d-nav{display:none!important;}.blog-grid{grid-template-columns:1fr!important;}#nav{padding:0 1.25rem;}}
+    @media(min-width:901px){.mob-btn{display:none!important;}}
+    @keyframes aurora{from{background-position:50% 50%,50% 50%;}to{background-position:350% 50%,350% 50%;}}
+    .aurora-bg{position:fixed;inset:-10px;pointer-events:none;z-index:0;background-image:repeating-linear-gradient(100deg,#000 0%,#000 7%,transparent 10%,transparent 12%,#000 16%),repeating-linear-gradient(100deg,#2A5C7A 10%,#1a8a84 15%,#1ECEC8 20%,#0e4a6a 25%,#2A5C7A 30%);background-size:300%,200%;background-position:50% 50%,50% 50%;filter:blur(10px);opacity:0.32;animation:aurora 60s linear infinite;mask-image:radial-gradient(ellipse at 80% 0%,black 10%,transparent 65%);-webkit-mask-image:radial-gradient(ellipse at 80% 0%,black 10%,transparent 65%);will-change:transform;}
+    .aurora-bg::after{content:'';position:absolute;inset:0;background-image:repeating-linear-gradient(100deg,#000 0%,#000 7%,transparent 10%,transparent 12%,#000 16%),repeating-linear-gradient(100deg,#2A5C7A 10%,#1a8a84 15%,#1ECEC8 20%,#0e4a6a 25%,#2A5C7A 30%);background-size:200%,100%;background-attachment:fixed;mix-blend-mode:difference;animation:aurora 60s linear infinite;}
+  </style>
+</head>
+<body>
+
+<div class="aurora-bg" aria-hidden="true"></div>
+
+<nav id="nav">
+  <div class="nav-inner">
+    <a href="index.html" aria-label="DARKNX" style="display:flex;align-items:center;flex-shrink:0;">
+      <img src="brand_assets/Group 27.png" alt="DARKNX" style="height:44px;width:auto;" />
+    </a>
+    <div class="d-nav" style="display:flex;align-items:center;gap:36px;">
+      <a href="index.html" class="nav-a">Home</a>
+      <div class="nav-item">
+        <a href="index.html#services" class="nav-a">Services</a>
+        <div class="nav-drop">
+          <a href="modular-deployments.html">Modular Deployments</a>
+          <a href="greenfield-data-centers.html">Greenfield Data Centers</a>
+          <a href="brownfield-data-centers.html">Brownfield Data Centers</a>
+          <a href="manufacturing.html">Manufacturing</a>
+          <div class="nav-drop-divider"></div>
+          <a href="consultation.html">Consultation</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="cooling.html" class="nav-a">AI Infrastructure</a>
+        <div class="nav-drop">
+          <a href="2-phase-cooling.html">2-Phase DTC Cooling</a>
+          <a href="cooling.html">Traditional Cooling</a>
+          <a href="manufacturing.html">Manufacturing</a>
+          <a href="energy.html">Energy</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="company.html" class="nav-a">About</a>
+        <div class="nav-drop">
+          <a href="company.html">Company</a>
+          <a href="partners.html">Partners</a>
+          <a href="impact.html">Impact</a>
+          <a href="leadership.html">Leadership</a>
+          <a href="careers.html">Careers</a>
+        </div>
+      </div>
+      <div class="nav-item">
+        <a href="blogs.html" class="nav-a" style="color:var(--teal);">Resources</a>
+        <div class="nav-drop">
+          <a href="press-release.html">Press Release</a>
+          <a href="blogs.html" style="color:var(--teal);">Blogs</a>
+          <a href="whitepapers.html">Whitepapers</a>
+        </div>
+      </div>
+      <a href="contact.html" class="nav-a">Contact</a>
+    </div>
+    <button class="mob-btn" onclick="document.getElementById('mob').classList.toggle('on')" aria-label="Menu" style="background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:6px;">
+      <span style="display:block;width:22px;height:1.5px;background:var(--text-1)"></span>
+      <span style="display:block;width:15px;height:1.5px;background:var(--teal)"></span>
+      <span style="display:block;width:22px;height:1.5px;background:var(--text-1)"></span>
+    </button>
+  </div>
+</nav>
+
+<div id="mob" role="dialog" aria-modal="true" aria-label="Navigation">
+  <button onclick="document.getElementById('mob').classList.remove('on')" style="position:absolute;top:22px;right:24px;background:none;border:none;color:var(--text-2);font-size:1.6rem;cursor:pointer;line-height:1;" aria-label="Close">×</button>
+  <a href="index.html" class="mlink">Home</a>
+  <a href="index.html#services" class="mlink">Services</a>
+  <a href="cooling.html" class="mlink">AI Infrastructure</a>
+  <a href="company.html" class="mlink">About</a>
+  <a href="blogs.html" class="mlink">Resources</a>
+  <a href="contact.html" class="mlink">Contact</a>
+</div>
+
+<!-- HERO -->
+<section style="padding-top:calc(var(--nav-h) + 6rem);padding-bottom:6rem;padding-left:3rem;padding-right:3rem;position:relative;overflow:hidden;">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(42,92,122,0.16) 0%,transparent 65%);pointer-events:none;"></div>
+  <div style="max-width:1320px;margin:0 auto;position:relative;z-index:1;">
+    <div style="margin-bottom:14px;"><span class="stag">BLOGS</span></div>
+    <h1 class="h-xl" style="margin-bottom:24px;max-width:700px;">Thinking on <span class="text-teal">AI Infrastructure.</span></h1>
+    <p style="font-size:1rem;line-height:1.78;color:var(--text-3);max-width:560px;">Technical insight, industry perspective, and project experience from the DARKNX team.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- BLOG GRID -->
+<section style="padding:7rem 3rem;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div style="margin-bottom:14px;"><span class="stag" style="color:#fff;">LATEST POSTS</span></div>
+    <h2 class="h-xl" style="margin-bottom:52px;max-width:560px;">From the <span class="text-teal">Field.</span></h2>
+
+    <div class="blog-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;">
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQFiuubUMxtx0A/feedshare-shrink_800/B56ZkCTMCVG4Ag-/0/1756680223831?e=2147483647&v=beta&t=F3xcBN6PHOcQ9TgUyvl4_GmYNHUsKvCEfen5Di7YTwA" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">NETWORKING</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Geography Meets Fiber: Low-Latency by Design</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">Network latency is a function of geography. DARKNX sites are positioned to maximize fiber path efficiency, reducing round-trip times for AI inference, real-time applications, and distributed compute clusters.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">SEP 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7369013853130514434" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQG5kIu22usTGg/feedshare-shrink_800/B56Zj8f9YhHcAg-/0/1756582896256?e=2147483647&v=beta&t=5k8J4kkEnWpr_v-tf_bO-HRFiqwCR56oIvIUE2xx4Ws" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">POWER</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Power at Megawatt Scale</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">From substation procurement to redundant UPS architectures, delivering and sustaining megawatt-class power feeds is now the defining challenge — and strategic differentiator — of high-density AI data center design.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7368289045870755840" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQHNlcHvLYyfMw/feedshare-shrink_800/B56Zjce05QHUAg-/0/1756045730303?e=2147483647&v=beta&t=KbL57hjQUIp0b9Etvj3qwAJUMfDhdBnh8fEATu9o9uA" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">STORAGE</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Storage at the Speed of AI</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">High-density GPU workloads demand storage infrastructure that keeps pace with compute. An overview of how modern data centers architect storage to match AI and HPC throughput requirements without creating bottlenecks.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7367205645986504705" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQGKITZ9T-YmZA/feedshare-shrink_800/B56Zjcat5WHcAk-/0/1756044651244?e=2147483647&v=beta&t=DKBtTZFDjJkvrKuwCm970IpRhkT-j-nU_HtYkCJ_ioQ" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">NETWORKING</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Telecom-Grade Connectivity for AI Data Centers</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">DARKNX data centers deliver direct, high-capacity routes to major carriers and cloud on-ramps, with resilient paths engineered for the latency demands of AI, HPC, and real-time workloads.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7366439448969949184" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQFH_v5ymo1clA/feedshare-shrink_800/B56ZjcRO8vHkAg-/0/1756042164134?e=2147483647&v=beta&t=EQ83-B4hdI_rAr0-IIGG6Sf8NLBh1Y2zNS_3bKqXOlQ" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">INFRASTRUCTURE</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Scalability by Design</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">High-density scalability requires deliberate architectural decisions from day one — modular compute, composable storage, and power headroom built in so AI and HPC workloads can grow without hitting hard capacity limits.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7365741000725622787" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQFWJUvbKA-RyQ/feedshare-shrink_800/B56ZjJXNEKG0Ag-/0/1755724961045?e=2147483647&v=beta&t=FfN_rHlf5jZh-p3GkYVxoytKMCIZmEiR5DltJI75u0s" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">NETWORKING</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Connectivity Is the Backbone of Performance</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">For AI, HPC, and latency-sensitive workloads, network architecture is as critical as power and cooling. DARKNX facilities are built with low-latency fiber, dense interconnection ecosystems, and resilient redundant paths that eliminate single points of failure.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7364774625592946688" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQGheab6BT0eWw/feedshare-shrink_800/B56Zi_TvTMHAAg-/0/1755556287811?e=2147483647&v=beta&t=CCQfHfHicXOub387eLheor1KTUePoBrEXySfwfGFrec" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">INFRASTRUCTURE</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Infrastructure Defines Capability</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">DARKNX data centers are engineered for AI, HPC, and cloud-scale workloads from the ground up — redundant megawatt-class power feeds, next-generation liquid cooling, and Tier-ready redundancy across power, cooling, and network for uninterrupted uptime.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7363910276351488000" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQGtFR0_QWd0tg/feedshare-shrink_800/B56Zi3etpLHUAk-/0/1755424940304?e=2147483647&v=beta&t=MeuWqqLPCvQ9OvpJvaeh51Pj7hESAcRMJo87dj9OEy8" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">POWER</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Power Is the New Frontier of Data Center Competitiveness</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">Grid capacity is now front and center. Hyper-scale AI clusters consume tens of megawatts per deployment, and utilities can't always deliver on time. Modern operators plan ahead with on-site generation, advanced UPS, and distribution systems designed for sustained high draw.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7363177981378260994" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQG2y8oH6b6DSQ/feedshare-shrink_800/B56Zifw_D8HQAs-/0/1755027087019?e=2147483647&v=beta&t=SvkdNT_pJHj9VAalnEUs5ermZAY91cXQxglsHAYK2ZU" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">INFRASTRUCTURE</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Rack Density Has Changed. Has Your Facility?</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">5–7kW per rack was once "high density." Today AI demands 30–50kW. Facilities built for yesterday hit hard limits on power and cooling. Modern high-density builds start with megawatt-scale capacity and headroom for the next hardware generation.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7361886851667808256" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQGDLVEoXte_Mw/feedshare-shrink_800/B56ZifvlIQHQAo-/0/1755026720331?e=2147483647&v=beta&t=f4LV2kWHFyoz3j5CJIN9CMAFu40VEQCP3BQxJJnXuqw" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">GPU</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">How to Achieve High Efficiency with NVIDIA H100 GPUs</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">A single H100 draws up to 700W — 5.6kW for an 8-GPU server. Pairing liquid-assisted cooling with high-efficiency power distribution sustains &gt;95% peak GPU performance across training runs while cutting facility energy use by 20–30%.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7361139419908632578" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQEQnM9opp9olg/feedshare-shrink_800/B56ZiSlehBHkAg-/0/1754805965183?e=2147483647&v=beta&t=wLAAb2L2UrjTkq4H51C8eyutj_I6zXcop-_gR5UtlJ4" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">AI HARDWARE</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">Building Infrastructure for Relentless AI Hardware Evolution</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">GPU architectures shift every 12–18 months. Future-ready design demands modular architectures, PCIe-disaggregated systems, high-bandwidth fabrics, and rack power headroom — so the next hardware generation lands without facility overhaul.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7360626090123411459" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQG550zEUOwNfg/feedshare-shrink_800/B56ZiA_Ih8HUAg-/0/1754510693931?e=2147483647&v=beta&t=xRbFzqLRkgxm07kz0JUGKH7FVZ-rnBOw391LUpA_K0Q" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">INFRASTRUCTURE</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">From Legacy to High-Performance: A DARKNX Migration Story</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">Moving a mid-sized organization to DARKNX's liquid-cooled, GPU-optimized facility achieved a 40% reduction in power overhead, scalable GPU nodes with no footprint expansion, and zero downtime during launch.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7359678545297641473" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card" style="background:var(--bg);display:flex;flex-direction:column;padding:0;overflow:hidden;">
+        <div style="width:100%;height:180px;overflow:hidden;flex-shrink:0;"><img src="https://media.licdn.com/dms/image/v2/D5622AQG9Ivngk3cpQg/feedshare-shrink_800/B56ZiAy1..G4Ak-/0/1754507471685?e=2147483647&v=beta&t=jaSO5WfLqj-Qq8V1hNpdlCvZqkD8lpEqdvT3MBY7_0w" alt="" style="width:100%;height:100%;object-fit:cover;display:block;" /></div>
+        <div style="padding:24px;display:flex;flex-direction:column;flex:1;">
+          <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:16px;">INFRASTRUCTURE</div>
+          <h3 class="f-michroma" style="font-size:0.9rem;letter-spacing:.02em;margin-bottom:12px;line-height:1.4;">How DARKNX's Infrastructure Withstood a Winter Storm</h3>
+          <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);margin-bottom:20px;flex:1;">When regional power disruptions struck Canada and the northeastern US, one DARKNX enterprise client experienced zero downtime. Infrastructure should be boring when it's done right — no drama, no fire drills. Just stability, even at 3AM.</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <span style="font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);font-family:'Michroma',sans-serif;">AUG 2025</span>
+            <a href="https://www.linkedin.com/feed/update/urn:li:activity:7358942494039949314" target="_blank" rel="noopener" aria-label="View on LinkedIn" style="display:flex;align-items:center;gap:7px;text-decoration:none;color:var(--text-3);transition:color .2s;" onmouseover="this.style.color='#3A9EC2'" onmouseout="this.style.color='var(--text-3)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg><span style="font-size:0.72rem;font-family:'Michroma',sans-serif;letter-spacing:.06em;">VIEW →</span></a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- PAGINATION -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:8px;margin-top:52px;">
+      <a href="blogs-2.html" style="font-family:'Michroma',sans-serif;font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);padding:9px 16px;border:1px solid var(--line);text-decoration:none;transition:color .2s,border-color .2s;" onmouseover="this.style.color='#3A9EC2';this.style.borderColor='rgba(42,92,122,0.4)'" onmouseout="this.style.color='var(--text-3)';this.style.borderColor='var(--line)'">← PREV</a>
+      <a href="blogs.html" style="font-family:'Michroma',sans-serif;font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);padding:9px 16px;border:1px solid var(--line);text-decoration:none;transition:color .2s,border-color .2s;" onmouseover="this.style.color='#3A9EC2';this.style.borderColor='rgba(42,92,122,0.4)'" onmouseout="this.style.color='var(--text-3)';this.style.borderColor='var(--line)'">1</a>
+      <a href="blogs-2.html" style="font-family:'Michroma',sans-serif;font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);padding:9px 16px;border:1px solid var(--line);text-decoration:none;transition:color .2s,border-color .2s;" onmouseover="this.style.color='#3A9EC2';this.style.borderColor='rgba(42,92,122,0.4)'" onmouseout="this.style.color='var(--text-3)';this.style.borderColor='var(--line)'">2</a>
+      <span style="font-family:'Michroma',sans-serif;font-size:0.7rem;letter-spacing:.1em;color:#fff;background:var(--teal);padding:9px 16px;border:1px solid var(--teal);">3</span>
+      <span style="font-family:'Michroma',sans-serif;font-size:0.7rem;letter-spacing:.1em;color:var(--text-3);padding:9px 16px;border:1px solid var(--line);cursor:default;opacity:0.4;">NEXT →</span>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="background:var(--bg-up);border-top:1px solid var(--line);padding:52px 3rem 32px;">
+  <div style="max-width:1320px;margin:0 auto;">
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:48px;margin-bottom:44px;">
+      <div>
+        <img src="brand_assets/Frame 16.png" alt="DARKNX" style="height:24px;width:auto;margin-bottom:16px;display:block;" />
+        <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);max-width:215px;margin-bottom:18px;">High-Density AI infrastructure. Engineered for reliability. Built for scale.</p>
+        <div style="font-size:0.75rem;line-height:1.8;color:var(--text-3);max-width:215px;margin-bottom:22px;">
+          <p style="font-size:0.67rem;letter-spacing:.1em;color:var(--text-3);margin-bottom:6px;">HEAD OFFICES</p>
+          <p>3619 7th Ave S<br>Seattle, WA — United States</p>
+          <p style="margin-top:8px;">100 University Avenue<br>Toronto, ON — Canada</p>
+        </div>
+        <div style="display:flex;gap:8px;">
+          <a href="https://x.com/weareinnventure/status/1990467523599360335" target="_blank" rel="noopener" class="si" aria-label="X"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--text-3)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="https://www.linkedin.com/company/darknx/" target="_blank" rel="noopener" class="si" aria-label="LinkedIn"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--text-3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">SERVICES</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="modular-deployments.html" class="fl">Modular Deployments</a></li>
+          <li><a href="greenfield-data-centers.html" class="fl">Greenfield Data Centers</a></li>
+          <li><a href="brownfield-data-centers.html" class="fl">Brownfield Data Centers</a></li>
+          <li><a href="manufacturing.html" class="fl">Manufacturing</a></li>
+          <li><a href="consultation.html" class="fl">Consultation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">COMPANY</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="company.html" class="fl">About</a></li>
+          <li><a href="partners.html" class="fl">Partners</a></li>
+          <li><a href="careers.html" class="fl">Careers</a></li>
+          <li><a href="contact.html" class="fl">Contact Us</a></li>
+          <li style="padding-top:8px;border-top:1px solid var(--line);margin-top:4px;"><a href="legal.html" class="fl">Legal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="f-michroma" style="font-size:0.67rem;letter-spacing:.15em;margin-bottom:18px;">RESOURCES</h4>
+        <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;">
+          <li><a href="press-release.html" class="fl">Press Release</a></li>
+          <li><a href="blogs.html" class="fl">Blogs</a></li>
+          <li><a href="whitepapers.html" class="fl">Whitepapers</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="divider" style="margin-bottom:20px;"></div>
+    <p style="font-size:0.71rem;color:var(--text-3);">© 2025 DARKNX Ltd. All rights reserved.</p>
+  </div>
+</footer>
+
+</body>
+</html>

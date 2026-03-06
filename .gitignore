@@ -1,0 +1,7 @@
+node_modules/
+temporary screenshots/
+.DS_Store
+.claude/
+Video Files/
+brand_assets/*.mp4
+brand_assets/Arctic 2.mp4
