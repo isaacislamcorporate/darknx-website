@@ -194,10 +194,20 @@
     .si:hover { border-color: var(--teal-border); }
 
     /* ── Mobile menu ── */
-    #mob { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(8,8,8,.97); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    #mob { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(8,8,8,.97); flex-direction: column; align-items: flex-start; justify-content: flex-start; overflow-y: auto; padding: 80px 36px 40px; gap: 0; }
     #mob.on { display: flex; }
-    .mlink { font-family: 'Michroma', sans-serif; font-size: 1.35rem; letter-spacing: .12em; color: var(--text-1); text-decoration: none; transition: color .2s; }
+    .mlink { font-family: 'Michroma', sans-serif; font-size: 1.2rem; letter-spacing: .1em; color: var(--text-1); text-decoration: none; transition: color .2s; display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px 0; border-bottom: 1px solid var(--line); }
     .mlink:hover { color: var(--teal); }
+    .mlink-plain { font-family: 'Michroma', sans-serif; font-size: 1.2rem; letter-spacing: .1em; color: var(--text-1); text-decoration: none; transition: color .2s; display: block; width: 100%; padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .mlink-plain:hover { color: var(--teal); }
+    .mob-section { width: 100%; }
+    .mob-toggle { background: none; border: none; width: 100%; cursor: pointer; }
+    .mob-sub { display: none; flex-direction: column; padding: 4px 0 8px 16px; gap: 0; }
+    .mob-sub.open { display: flex; }
+    .mob-sub a { font-size: 0.85rem; letter-spacing: .06em; color: var(--text-3); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color .2s; }
+    .mob-sub a:hover { color: var(--teal); }
+    .mob-chevron { font-size: 0.75rem; transition: transform .2s; color: var(--text-3); }
+    .mob-chevron.open { transform: rotate(180deg); }
 
     /* ── Responsive ── */
     @media (max-width: 900px) {
@@ -290,10 +300,57 @@
 <div id="mob" role="dialog" aria-modal="true" aria-label="Navigation">
   <button onclick="document.getElementById('mob').classList.remove('on')"
     style="position:absolute;top:22px;right:24px;background:none;border:none;color:var(--text-2);font-size:1.6rem;cursor:pointer;line-height:1;" aria-label="Close">×</button>
-  <a href="#services" class="mlink" onclick="document.getElementById('mob').classList.remove('on')">Services</a>
-  <a href="cooling.html" class="mlink" onclick="document.getElementById('mob').classList.remove('on')">AI Infrastructure</a>
-  <a href="company.html" class="mlink" onclick="document.getElementById('mob').classList.remove('on')">About</a>
-  <a href="contact.html" class="mlink" onclick="document.getElementById('mob').classList.remove('on')">Contact</a>
+
+  <div class="mob-section">
+    <button class="mob-toggle" onclick="toggleMobSection(this)">
+      <span class="mlink">Services <span class="mob-chevron">▾</span></span>
+    </button>
+    <div class="mob-sub">
+      <a href="modular-deployments.html">Modular Deployments</a>
+      <a href="greenfield-data-centers.html">Greenfield Data Centers</a>
+      <a href="brownfield-data-centers.html">Brownfield Data Centers</a>
+      <a href="manufacturing.html">Manufacturing</a>
+      <a href="consultation.html">Consultation</a>
+    </div>
+  </div>
+
+  <div class="mob-section">
+    <button class="mob-toggle" onclick="toggleMobSection(this)">
+      <span class="mlink">AI Infrastructure <span class="mob-chevron">▾</span></span>
+    </button>
+    <div class="mob-sub">
+      <a href="2-phase-cooling.html">2-Phase DTC Cooling</a>
+      <a href="cooling.html">Traditional Cooling</a>
+      <a href="manufacturing.html">Manufacturing</a>
+      <a href="energy.html">Energy</a>
+    </div>
+  </div>
+
+  <div class="mob-section">
+    <button class="mob-toggle" onclick="toggleMobSection(this)">
+      <span class="mlink">About <span class="mob-chevron">▾</span></span>
+    </button>
+    <div class="mob-sub">
+      <a href="company.html">Company</a>
+      <a href="partners.html">Partners</a>
+      <a href="impact.html">Impact</a>
+      <a href="leadership.html">Leadership</a>
+      <a href="careers.html">Careers</a>
+    </div>
+  </div>
+
+  <div class="mob-section">
+    <button class="mob-toggle" onclick="toggleMobSection(this)">
+      <span class="mlink">Resources <span class="mob-chevron">▾</span></span>
+    </button>
+    <div class="mob-sub">
+      <a href="press-release.html">Press Release</a>
+      <a href="blogs.html">Blogs</a>
+      <a href="whitepapers.html">Whitepapers</a>
+    </div>
+  </div>
+
+  <a href="contact.html" class="mlink-plain">Contact</a>
 </div>
 
 
@@ -318,7 +375,7 @@
 
       <!-- Headline -->
       <h1 class="f-michroma"
-        style="font-size:clamp(3rem,5.5vw,5.2rem);line-height:1.05;letter-spacing:-.03em;">
+        style="font-size:clamp(2rem,7vw,5.2rem);line-height:1.05;letter-spacing:-.03em;">
         AI and HPC<br/>
         <span class="text-teal">Factory</span><br/>
         Infrastructure
@@ -771,6 +828,18 @@
     document.getElementById('bar').classList.add('gone')
     document.getElementById('nav').classList.add('bar-gone')
     document.getElementById('hero').style.paddingTop = 'var(--nav-h)'
+  }
+  function toggleMobSection(btn) {
+    const sub = btn.nextElementSibling;
+    const chevron = btn.querySelector('.mob-chevron');
+    const isOpen = sub.classList.contains('open');
+    // close all
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-chevron').forEach(c => c.classList.remove('open'));
+    if (!isOpen) {
+      sub.classList.add('open');
+      chevron.classList.add('open');
+    }
   }
 </script>
 
