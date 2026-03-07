@@ -118,6 +118,10 @@
     /* ── Spec card ── */
     .spec-r { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--line); }
     .spec-r:last-child { border-bottom: none; }
+    @media (max-width: 640px) {
+      .spec-r { flex-direction: column; align-items: flex-start; gap: 3px; }
+      .h-xl { font-size: clamp(1.8rem, 7vw, 3.4rem) !important; }
+    }
     .sk { font-size: 0.71rem; color: var(--text-3); letter-spacing: .1em; }
     .sv { font-family: 'Michroma', sans-serif; font-size: 0.71rem; color: var(--text-1); }
     .sv.t { color: var(--teal); }
@@ -134,10 +138,20 @@
     .si:hover { border-color: var(--teal-border); }
 
     /* ── Mobile menu ── */
-    #mob { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(8,8,8,.97); flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem; }
+    #mob { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(8,8,8,.97); flex-direction: column; align-items: flex-start; justify-content: flex-start; overflow-y: auto; padding: 80px 36px 40px; gap: 0; }
     #mob.on { display: flex; }
-    .mlink { font-family: 'Michroma', sans-serif; font-size: 1.35rem; letter-spacing: .12em; color: var(--text-1); text-decoration: none; transition: color .2s; }
+    .mlink { font-family: 'Michroma', sans-serif; font-size: 1.2rem; letter-spacing: .1em; color: var(--text-1); text-decoration: none; transition: color .2s; display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px 0; border-bottom: 1px solid var(--line); }
     .mlink:hover { color: var(--teal); }
+    .mlink-plain { font-family: 'Michroma', sans-serif; font-size: 1.2rem; letter-spacing: .1em; color: var(--text-1); text-decoration: none; transition: color .2s; display: block; width: 100%; padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .mlink-plain:hover { color: var(--teal); }
+    .mob-section { width: 100%; }
+    .mob-toggle { background: none; border: none; width: 100%; cursor: pointer; }
+    .mob-sub { display: none; flex-direction: column; padding: 4px 0 8px 16px; gap: 0; }
+    .mob-sub.open { display: flex; }
+    .mob-sub a { font-size: 0.85rem; letter-spacing: .06em; color: var(--text-3); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color .2s; }
+    .mob-sub a:hover { color: var(--teal); }
+    .mob-chevron { font-size: 0.75rem; transition: transform .2s; color: var(--text-3); }
+    .mob-chevron.open { transform: rotate(180deg); }
 
     @media (max-width: 900px) {
       .d-nav { display: none !important; }

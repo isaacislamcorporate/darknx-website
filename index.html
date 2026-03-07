@@ -179,6 +179,10 @@
     /* ── Spec card ── */
     .spec-r { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--line); }
     .spec-r:last-child { border-bottom: none; }
+    @media (max-width: 640px) {
+      .spec-r { flex-direction: column; align-items: flex-start; gap: 3px; }
+      .h-xl { font-size: clamp(1.8rem, 7vw, 3.4rem) !important; }
+    }
     .sk { font-size: 0.71rem; color: var(--text-3); letter-spacing: .1em; }
     .sv { font-family: 'Michroma', sans-serif; font-size: 0.71rem; color: var(--text-1); }
     .sv.t { color: var(--teal); }

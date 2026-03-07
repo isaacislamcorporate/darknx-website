@@ -871,5 +871,16 @@
     }, 100);
   }
 </script>
+
+<script>
+  function toggleMobSection(btn) {
+    const sub = btn.nextElementSibling;
+    const chevron = btn.querySelector('.mob-chevron');
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-chevron').forEach(c => c.classList.remove('open'));
+    if (!isOpen) { sub.classList.add('open'); chevron.classList.add('open'); }
+  }
+</script>
 </body>
 </html>

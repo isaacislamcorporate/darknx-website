@@ -35,14 +35,29 @@
     .stag{font-family:'Michroma',sans-serif;font-size:0.62rem;letter-spacing:0.24em;color:var(--teal);}
     .h-xl{font-family:'Michroma',sans-serif;font-size:clamp(2rem,3.8vw,3.4rem);line-height:1.08;letter-spacing:-.03em;}
     .spec-r{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid var(--line);}
-    .spec-r:last-child{border-bottom:none;}.sk{font-size:0.71rem;color:var(--text-3);letter-spacing:.1em;}
+    .spec-r:last-child{border-bottom:none;}
+    @media (max-width: 640px) {
+      .spec-r { flex-direction: column; align-items: flex-start; gap: 3px; }
+    }.sk{font-size:0.71rem;color:var(--text-3);letter-spacing:.1em;}
     .sv{font-family:'Michroma',sans-serif;font-size:0.71rem;color:var(--text-1);}.sv.t{color:var(--teal);}
     .step-row{display:flex;gap:24px;align-items:flex-start;padding:28px 0;border-bottom:1px solid var(--line);}
     .step-row:last-child{border-bottom:none;}.step-num{font-family:'Michroma',sans-serif;font-size:1.4rem;color:var(--teal);min-width:48px;}
     .fl{font-size:0.82rem;color:var(--text-3);text-decoration:none;transition:color .2s;}.fl:hover{color:var(--text-1);}
     .si{width:30px;height:30px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:border-color .2s;}.si:hover{border-color:var(--teal-border);}
-    #mob{display:none;position:fixed;inset:0;z-index:600;background:rgba(8,8,8,.97);flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;}
-    #mob.on{display:flex;}.mlink{font-family:'Michroma',sans-serif;font-size:1.35rem;letter-spacing:.12em;color:var(--text-1);text-decoration:none;transition:color .2s;}.mlink:hover{color:var(--teal);}
+        #mob { display: none; position: fixed; inset: 0; z-index: 600; background: rgba(8,8,8,.97); flex-direction: column; align-items: flex-start; justify-content: flex-start; overflow-y: auto; padding: 80px 36px 40px; gap: 0; }
+    #mob.on { display: flex; }
+    .mlink { font-family: 'Michroma', sans-serif; font-size: 1.2rem; letter-spacing: .1em; color: var(--text-1); text-decoration: none; transition: color .2s; display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .mlink:hover { color: var(--teal); }
+    .mlink-plain { font-family: 'Michroma', sans-serif; font-size: 1.2rem; letter-spacing: .1em; color: var(--text-1); text-decoration: none; transition: color .2s; display: block; width: 100%; padding: 16px 0; border-bottom: 1px solid var(--line); }
+    .mlink-plain:hover { color: var(--teal); }
+    .mob-section { width: 100%; }
+    .mob-toggle { background: none; border: none; width: 100%; cursor: pointer; }
+    .mob-sub { display: none; flex-direction: column; padding: 4px 0 8px 16px; gap: 0; }
+    .mob-sub.open { display: flex; }
+    .mob-sub a { font-size: 0.85rem; letter-spacing: .06em; color: var(--text-3); text-decoration: none; padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.04); transition: color .2s; }
+    .mob-sub a:hover { color: var(--teal); }
+    .mob-chevron { font-size: 0.75rem; transition: transform .2s; color: var(--text-3); }
+    .mob-chevron.open { transform: rotate(180deg); }
     @media(max-width:900px){.d-nav{display:none!important;}.hero-cols,.specs-cols{grid-template-columns:1fr!important;}#nav{padding:0 1.25rem;}}
     @media(min-width:901px){.mob-btn{display:none!important;}}
     [style*="gap:1px"]>div{transition:background .25s ease,box-shadow .25s ease;}[style*="gap:1px"]>div:hover{background:rgba(107,174,214,.1)!important;box-shadow:inset 0 0 0 1px rgba(107,174,214,.22);}
@@ -314,5 +329,16 @@
   </div>
 </footer>
 
+
+<script>
+  function toggleMobSection(btn) {
+    const sub = btn.nextElementSibling;
+    const chevron = btn.querySelector('.mob-chevron');
+    const isOpen = sub.classList.contains('open');
+    document.querySelectorAll('.mob-sub').forEach(s => s.classList.remove('open'));
+    document.querySelectorAll('.mob-chevron').forEach(c => c.classList.remove('open'));
+    if (!isOpen) { sub.classList.add('open'); chevron.classList.add('open'); }
+  }
+</script>
 </body>
 </html>
