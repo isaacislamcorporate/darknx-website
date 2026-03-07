@@ -78,6 +78,15 @@
       [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
     }
+  
+    /* ── Footer Mobile Fix ── */
+    @media (max-width: 900px) {
+      [style*="grid-template-columns:1.4fr 1fr 1fr 1fr"] { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+      footer { padding-left: 1.5rem !important; padding-right: 1.5rem !important; }
+    }
+    @media (max-width: 560px) {
+      [style*="grid-template-columns:1.4fr 1fr 1fr 1fr"] { grid-template-columns: 1fr !important; gap: 24px !important; }
+    }
   </style>
 </head>
 <body>
