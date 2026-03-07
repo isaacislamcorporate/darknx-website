@@ -81,6 +81,7 @@
       .hero-cols, .benefits-cols, .inf-grid, .why-grid { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      .comp-img-last { order: 2; }
     }
   
     /* ── Footer Mobile Fix ── */
@@ -292,7 +293,7 @@
 <section style="padding:7rem 3rem;background:var(--bg-up);">
   <div style="max-width:1320px;margin:0 auto;">
     <div class="comp-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
-      <div style="aspect-ratio:4/3;border:1px solid var(--teal-border);box-shadow:0 0 0 1px rgba(42,92,122,0.08),0 8px 40px rgba(42,92,122,0.18);border-radius:6px;position:relative;overflow:hidden;">
+      <div class="comp-img-last" style="aspect-ratio:4/3;border:1px solid var(--teal-border);box-shadow:0 0 0 1px rgba(42,92,122,0.08),0 8px 40px rgba(42,92,122,0.18);border-radius:6px;position:relative;overflow:hidden;">
         <img src="https://i43dl9337kzyzjhq.public.blob.vercel-storage.com/Video%20Files/Utility%20Transformer.png" alt="Power Infrastructure" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.65) brightness(0.88);" />
         <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(28,31,35,0.45) 0%,rgba(42,92,122,0.25) 60%,rgba(28,31,35,0.5) 100%);mix-blend-mode:multiply;pointer-events:none;"></div>
         <div style="position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%, transparent 40%, rgba(28,31,35,0.85) 100%);pointer-events:none;"></div>
