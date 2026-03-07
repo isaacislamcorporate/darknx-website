@@ -77,6 +77,12 @@
       .hero-cols, .benefits-cols, .inf-grid, .why-grid { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      /* Press release card stacking */
+      .pr-card > div { flex-direction: column !important; }
+      .pr-card [style*="width:220px"] { width: 100% !important; min-height: 200px !important; }
+      .pr-card [style*="padding:28px 32px"] { padding: 20px !important; flex-wrap: nowrap !important; }
+      .pr-card [style*="min-width:200px"] { min-width: 0 !important; }
+      .pr-card [style*="text-align:right"] { text-align: left !important; margin-top: 12px; }
     }
   
     /* ── Footer Mobile Fix ── */
