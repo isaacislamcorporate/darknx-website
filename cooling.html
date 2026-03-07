@@ -83,6 +83,7 @@
       .hero-cols, .benefits-cols, .inf-grid, .why-grid { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      .spec-tbl > div { flex-direction: column !important; align-items: flex-start !important; gap: 4px !important; }
     }
   
     /* ── Footer Mobile Fix ── */
@@ -311,7 +312,7 @@
           <h3 class="f-michroma" style="font-size:1.1rem;letter-spacing:.04em;color:var(--text-1);">Precision Liquid, Purpose-Built</h3>
         </div>
         <p style="font-size:0.88rem;line-height:1.78;color:var(--text-3);margin-bottom:28px;">Single-phase liquid cooling uses chilled or ambient-temperature water flowing through cold plates and rear-door heat exchangers to remove heat from compute hardware. DARKNX integrates single-phase systems across greenfield, brownfield, and modular deployments — including facilities that require a phased migration path from air to full liquid cooling.</p>
-        <div style="display:flex;flex-direction:column;gap:1px;background:var(--line);margin-bottom:28px;">
+        <div class="spec-tbl" style="display:flex;flex-direction:column;gap:1px;background:var(--line);margin-bottom:28px;">
           <div style="background:var(--bg);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:0.71rem;letter-spacing:.1em;color:var(--text-3);">TECHNOLOGY</span>
             <span class="f-michroma" style="font-size:0.71rem;color:var(--teal);">Cold plate, rear-door HEX</span>
@@ -348,7 +349,7 @@
           <h3 class="f-michroma" style="font-size:1.1rem;letter-spacing:.04em;color:var(--text-1);">Precision Air, Where It Fits</h3>
         </div>
         <p style="font-size:0.88rem;line-height:1.78;color:var(--text-3);margin-bottom:28px;">Air cooling remains the right solution for many deployments — particularly enterprise colocation, edge computing, and lower-density compute environments. DARKNX designs precision air-cooled data halls with hot/cold aisle containment, CRAC/CRAH units, and computational fluid dynamics (CFD) modelling to maximize efficiency before liquid cooling is required.</p>
-        <div style="display:flex;flex-direction:column;gap:1px;background:var(--line);margin-bottom:28px;">
+        <div class="spec-tbl" style="display:flex;flex-direction:column;gap:1px;background:var(--line);margin-bottom:28px;">
           <div style="background:var(--bg);padding:18px 20px;display:flex;justify-content:space-between;align-items:center;">
             <span style="font-size:0.71rem;letter-spacing:.1em;color:var(--text-3);">TECHNOLOGY</span>
             <span class="f-michroma" style="font-size:0.71rem;color:var(--teal);">CRAC / CRAH, in-row cooling</span>
