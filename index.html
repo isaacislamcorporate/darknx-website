@@ -28,7 +28,6 @@
       --text-2:      #FFFFFF;
       --text-3:      #6B7280;
       --line:        rgba(255,255,255,0.07);
-      --bar-h:       36px;
       --nav-h:       64px;
     }
 
@@ -82,34 +81,16 @@
     .btn-o:focus-visible { outline: 2px solid var(--teal); outline-offset: 3px; }
 
     /* ── Announcement bar ── */
-    #bar {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 400;
-      height: var(--bar-h); background: #151515; border-bottom: 1px solid var(--line);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.77rem; letter-spacing: 0.03em; color: var(--text-2);
-      padding: 0 48px;
-      transition: transform .3s cubic-bezier(.4,0,.2,1), opacity .3s ease;
-    }
-    #bar.gone { transform: translateY(-100%); opacity: 0; pointer-events: none; }
-    .bar-link { color: var(--teal); margin-left: 7px; text-decoration: none; transition: opacity .2s; }
-    .bar-link:hover { opacity: .75; }
-    #bar-close {
-      position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
-      background: none; border: none; color: var(--text-3); cursor: pointer; font-size: 1.05rem; line-height: 1;
-      transition: color .2s;
-    }
-    #bar-close:hover { color: var(--text-1); }
 
     /* ── Nav ── */
     #nav {
       position: fixed; left: 0; right: 0; z-index: 300;
-      top: var(--bar-h); height: var(--nav-h);
+      top: 0; height: var(--nav-h);
       display: flex; align-items: center; padding: 0 3rem;
       background: rgba(28,31,35,0.92); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px);
       border-bottom: 1px solid var(--line);
       transition: top .3s cubic-bezier(.4,0,.2,1);
     }
-    #nav.bar-gone { top: 0; }
     .nav-inner { max-width: 1320px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; }
     .nav-a {
       font-size: 0.81rem; letter-spacing: 0.05em; color: var(--text-2); text-decoration: none;
@@ -271,13 +252,6 @@
 </head>
 <body>
 
-<!-- ═══════════ ANNOUNCEMENT BAR ═══════════ -->
-<div id="bar">
-  AI's biggest stage returns. Meet us at GTC on March 16–17
-  <a href="#" class="bar-link">Learn More →</a>
-  <button id="bar-close" onclick="dismissBar()" aria-label="Dismiss">×</button>
-</div>
-
 <!-- ═══════════ NAV ═══════════ -->
 <nav id="nav">
   <div class="nav-inner">
@@ -395,7 +369,7 @@
 
 <!-- ═══════════ HERO ═══════════ -->
 <section id="hero"
-  style="padding-top:calc(var(--bar-h) + var(--nav-h));min-height:100vh;display:flex;flex-direction:column;">
+  style="padding-top:var(--nav-h);min-height:100vh;display:flex;flex-direction:column;">
 
   <div class="hero-grid"
     style="flex:1;display:grid;grid-template-columns:1fr 1fr;min-height:0;">
@@ -863,12 +837,7 @@
 </footer>
 
 <script>
-  function dismissBar() {
-    document.getElementById('bar').classList.add('gone')
-    document.getElementById('nav').classList.add('bar-gone')
-    document.getElementById('hero').style.paddingTop = 'var(--nav-h)'
-  }
-  function toggleMobSection(btn) {
+function toggleMobSection(btn) {
     const sub = btn.nextElementSibling;
     const chevron = btn.querySelector('.mob-chevron');
     const isOpen = sub.classList.contains('open');
