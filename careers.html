@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/brand_assets/Group%2024.png">
+  <link rel="icon" type="image/png" href="/favicon.ico">
   <meta property="og:image" content="https://www.darknx.com/brand_assets/Group%2025.png">
   <meta property="og:type" content="website">
-  <title>Careers — DARKNX</title>
+  <title>Careers, DARKNX</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -82,6 +82,9 @@
       .hero-cols, .benefits-cols, .inf-grid, .why-grid { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns: repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns:1fr 1.3fr"] { grid-template-columns: 1fr !important; }
     }
   
     /* ── Footer Mobile Fix ── */
@@ -112,6 +115,7 @@
           <a href="manufacturing.html">Manufacturing</a>
           <div class="nav-drop-divider"></div>
           <a href="consultation.html">Consultation</a>
+          <a href="become-a-tenant.html">Become a Tenant</a>
         </div>
       </div>
       <div class="nav-item">
@@ -167,6 +171,7 @@
       <a href="brownfield-data-centers.html">Brownfield Data Centers</a>
       <a href="manufacturing.html">Manufacturing</a>
       <a href="consultation.html">Consultation</a>
+          <a href="become-a-tenant.html">Become a Tenant</a>
     </div>
   </div>
 
@@ -221,7 +226,7 @@
     </div>
     <div style="margin-bottom:14px;"><span class="stag" style="color:#3A9EC2;">CAREERS</span></div>
     <h1 class="h-xl" style="margin-bottom:24px;max-width:700px;color:#FFFFFF;">Build What <span style="color:#3A9EC2;">Powers AI.</span></h1>
-    <p style="font-size:1rem;line-height:1.78;color:var(--text-1);max-width:560px;">DARKNX is building the infrastructure layer that AI runs on. We're looking for people who want to work on problems that actually matter — in power, cooling, construction, engineering, and operations.</p>
+    <p style="font-size:1rem;line-height:1.78;color:var(--text-1);max-width:560px;">DARKNX is building the infrastructure layer that AI runs on. We're looking for people who want to work on problems that actually matter, in power, cooling, construction, engineering, and operations.</p>
   </div>
 </section>
 
@@ -240,12 +245,12 @@
           <div style="padding:20px;border:1px solid var(--line);background:var(--bg-up);">
             <div class="f-michroma text-teal" style="font-size:0.63rem;letter-spacing:.14em;margin-bottom:10px;">AREAS WE HIRE IN</div>
             <ul style="list-style:none;display:flex;flex-direction:column;gap:9px;">
-              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">—</span>Data Center Engineering</li>
-              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">—</span>Power &amp; Electrical Engineering</li>
-              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">—</span>Thermal &amp; Cooling Systems</li>
-              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">—</span>Construction &amp; Project Management</li>
-              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">—</span>Operations &amp; Commissioning</li>
-              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">—</span>Business Development</li>
+              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">,</span>Data Center Engineering</li>
+              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">,</span>Power &amp; Electrical Engineering</li>
+              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">,</span>Thermal &amp; Cooling Systems</li>
+              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">,</span>Construction &amp; Project Management</li>
+              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">,</span>Operations &amp; Commissioning</li>
+              <li style="font-size:0.82rem;color:var(--text-3);display:flex;gap:10px;"><span style="color:var(--teal);">,</span>Business Development</li>
             </ul>
           </div>
         </div>
@@ -344,7 +349,7 @@ function handleSubmit(e) {
       btn.style.boxShadow = 'none';
     } else {
       console.error('HubSpot error', status, JSON.stringify(data));
-      btn.textContent = 'Error — please try again';
+      btn.textContent = 'Error, please try again';
       btn.style.background = 'rgba(122,42,42,0.3)';
       btn.style.color = '#f87171';
       btn.disabled = false;
@@ -352,7 +357,7 @@ function handleSubmit(e) {
   })
   .catch(err => {
     console.error('Submit failed', err);
-    btn.textContent = 'Error — please try again';
+    btn.textContent = 'Error, please try again';
     btn.style.background = 'rgba(122,42,42,0.3)';
     btn.style.color = '#f87171';
     btn.disabled = false;
@@ -369,8 +374,8 @@ function handleSubmit(e) {
         <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);max-width:215px;margin-bottom:18px;">High-Density AI infrastructure. Engineered for reliability. Built for scale.</p>
         <div style="font-size:0.75rem;line-height:1.8;color:var(--text-3);max-width:215px;margin-bottom:22px;">
           <p style="font-size:0.67rem;letter-spacing:.1em;color:var(--text-3);margin-bottom:6px;">HEAD OFFICES</p>
-          <p>3619 7th Ave S<br>Seattle, WA — United States</p>
-          <p style="margin-top:8px;">100 University Avenue<br>Toronto, ON — Canada</p>
+          <p>3619 7th Ave S<br>Seattle, WA, United States</p>
+          <p style="margin-top:8px;">100 University Avenue<br>Toronto, ON, Canada</p>
         </div>
         <div style="display:flex;gap:8px;">
           <a href="https://x.com/weareinnventure/status/1990467523599360335" target="_blank" rel="noopener" class="si" aria-label="X"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--text-3)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
@@ -385,6 +390,7 @@ function handleSubmit(e) {
           <li><a href="brownfield-data-centers.html" class="fl">Brownfield Data Centers</a></li>
           <li><a href="manufacturing.html" class="fl">Manufacturing</a></li>
           <li><a href="consultation.html" class="fl">Consultation</a></li>
+          <li><a href="become-a-tenant.html" class="fl">Become a Tenant</a></li>
         </ul>
       </div>
       <div>

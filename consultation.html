@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="icon" type="image/png" href="/brand_assets/Group%2024.png">
+  <link rel="icon" type="image/png" href="/favicon.ico">
   <meta property="og:image" content="https://www.darknx.com/brand_assets/Group%2025.png">
   <meta property="og:type" content="website">
-  <title>Consultation — DARKNX</title>
+  <title>Consultation, DARKNX</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -86,6 +86,8 @@
       .hero-cols, .benefits-cols, .inf-grid, .why-grid { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns:1fr 1fr"] { grid-template-columns: 1fr !important; }
       [style*="grid-template-columns: 1fr 1fr"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns:repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
+      [style*="grid-template-columns: repeat(3,1fr)"] { grid-template-columns: 1fr !important; }
     }
   
     /* ── Footer Mobile Fix ── */
@@ -118,6 +120,7 @@
           <a href="manufacturing.html">Manufacturing</a>
           <div class="nav-drop-divider"></div>
           <a href="consultation.html" style="color:var(--teal);">Consultation</a>
+          <a href="become-a-tenant.html">Become a Tenant</a>
         </div>
       </div>
       <div class="nav-item">
@@ -173,6 +176,7 @@
       <a href="brownfield-data-centers.html">Brownfield Data Centers</a>
       <a href="manufacturing.html">Manufacturing</a>
       <a href="consultation.html">Consultation</a>
+          <a href="become-a-tenant.html">Become a Tenant</a>
     </div>
   </div>
 
@@ -226,7 +230,7 @@
     <div class="hero-cols" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
       <div>
         <h1 class="h-xl" style="margin-bottom:24px;">Expert Guidance. <span class="text-teal">No Agenda.</span></h1>
-        <p style="font-size:1rem;line-height:1.78;color:var(--text-3);max-width:480px;margin-bottom:36px;">Independent technical advisory for data center projects at any stage. From feasibility through commissioning, DARKNX provides vendor-neutral guidance covering design, risk, capacity, and regulatory — with no product to sell.</p>
+        <p style="font-size:1rem;line-height:1.78;color:var(--text-3);max-width:480px;margin-bottom:36px;">Independent technical advisory for data center projects at any stage. From feasibility through commissioning, DARKNX provides vendor-neutral guidance covering design, risk, capacity, and regulatory, with no product to sell.</p>
         <div style="display:flex;gap:12px;flex-wrap:wrap;">
           <a href="contact.html"><button class="btn-p">Discuss Project Scope →</button></a>
           <a href="whitepapers.html"><button class="btn-o">Download Overview</button></a>
@@ -282,7 +286,7 @@
         </div>
         <div style="padding:24px;border:1px solid var(--line);">
           <div style="font-size:0.72rem;letter-spacing:.12em;color:var(--teal);font-family:'Michroma',sans-serif;margin-bottom:10px;">END-TO-END COVERAGE</div>
-          <p style="font-size:0.85rem;line-height:1.72;color:var(--text-3);">Whether you're at concept stage or mid-construction, our advisory team can engage at any point in the project lifecycle — providing structured guidance without disrupting ongoing work.</p>
+          <p style="font-size:0.85rem;line-height:1.72;color:var(--text-3);">Whether you're at concept stage or mid-construction, our advisory team can engage at any point in the project lifecycle, providing structured guidance without disrupting ongoing work.</p>
         </div>
         <div style="padding:24px;border:1px solid var(--line);">
           <div style="font-size:0.72rem;letter-spacing:.12em;color:var(--teal);font-family:'Michroma',sans-serif;margin-bottom:10px;">BUILT ON DELIVERY EXPERIENCE</div>
@@ -319,14 +323,14 @@
         <div class="step-num">03</div>
         <div>
           <h3 class="f-michroma" style="font-size:0.85rem;letter-spacing:.04em;margin-bottom:8px;">Findings &amp; Recommendations</h3>
-          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">We deliver clear, prioritised findings with actionable recommendations. Reports are structured for technical and executive audiences — providing the detail engineers need and the clarity decision-makers require.</p>
+          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">We deliver clear, prioritised findings with actionable recommendations. Reports are structured for technical and executive audiences, providing the detail engineers need and the clarity decision-makers require.</p>
         </div>
       </div>
       <div class="step-row">
         <div class="step-num">04</div>
         <div>
           <h3 class="f-michroma" style="font-size:0.85rem;letter-spacing:.04em;margin-bottom:8px;">Ongoing Advisory Support</h3>
-          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">Where needed, DARKNX can remain engaged through implementation — providing a point of independent technical oversight to ensure recommendations are applied correctly and new risks are identified early.</p>
+          <p style="font-size:0.85rem;line-height:1.75;color:var(--text-3);">Where needed, DARKNX can remain engaged through implementation, providing a point of independent technical oversight to ensure recommendations are applied correctly and new risks are identified early.</p>
         </div>
       </div>
     </div>
@@ -362,8 +366,8 @@
         <p style="font-size:0.82rem;line-height:1.7;color:var(--text-3);max-width:215px;margin-bottom:18px;">High-Density AI infrastructure. Engineered for reliability. Built for scale.</p>
         <div style="font-size:0.75rem;line-height:1.8;color:var(--text-3);max-width:215px;margin-bottom:22px;">
           <p style="font-size:0.67rem;letter-spacing:.1em;color:var(--text-3);margin-bottom:6px;">HEAD OFFICES</p>
-          <p>3619 7th Ave S<br>Seattle, WA — United States</p>
-          <p style="margin-top:8px;">100 University Avenue<br>Toronto, ON — Canada</p>
+          <p>3619 7th Ave S<br>Seattle, WA, United States</p>
+          <p style="margin-top:8px;">100 University Avenue<br>Toronto, ON, Canada</p>
         </div>
         <div style="display:flex;gap:8px;">
           <a href="https://x.com/weareinnventure/status/1990467523599360335" target="_blank" rel="noopener" class="si" aria-label="X"><svg width="12" height="12" viewBox="0 0 24 24" fill="var(--text-3)"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
@@ -378,6 +382,7 @@
           <li><a href="brownfield-data-centers.html" class="fl">Brownfield Data Centers</a></li>
           <li><a href="manufacturing.html" class="fl">Manufacturing</a></li>
           <li><a href="consultation.html" class="fl" style="color:var(--teal);">Consultation</a></li>
+          <li><a href="become-a-tenant.html" class="fl">Become a Tenant</a></li>
         </ul>
       </div>
       <div>
